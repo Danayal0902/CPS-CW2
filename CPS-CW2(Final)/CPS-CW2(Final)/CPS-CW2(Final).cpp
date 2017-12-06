@@ -73,7 +73,7 @@ public:
 				accel[i].zero();
 			}
 
-			#pragma omp parallel for num_threads(4)
+			#pragma omp parallel for num_threads(4) // openmp construct to parallelise for loop running in 4 threads
 			for (int i = 0; i < numBodies; ++i) {
 				MutableBody & pi = bodies[i];
 				for (int j = i + 1; j < numBodies; ++j) {
@@ -107,12 +107,18 @@ public:
 };
 
 int main(int argc, char *argv[]) {
+
 	using namespace std::chrono;
-	NBodyMutableClass sim(1000, 0.01);
+	NBodyMutableClass sim(2000, 0.01);
 
 	//high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
-	sim.forSim(1000);
+
+
+
+	sim.forSim(2000); //call forSim method with desired data size
+
+
 
 	//high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
